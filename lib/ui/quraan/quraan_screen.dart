@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:islamy/component/functions.dart';
+import 'package:islamy/providers/theme_provider.dart';
 import 'package:islamy/themes/app_theme.dart';
 import 'package:islamy/ui/quraan/sura_details.dart';
+import 'package:provider/provider.dart';
 
 class QuraanScreeen extends StatelessWidget {
    QuraanScreeen({Key? key}) : super(key: key);
@@ -25,6 +29,10 @@ class QuraanScreeen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+
+
     return Scaffold(
       body: Column(
         children: [
@@ -34,38 +42,38 @@ class QuraanScreeen extends StatelessWidget {
           ),
           Container(
             width: double.infinity,
-            color: AppThemes.primaryColor,
+            color: themeProvider.currentMode == ThemeMode.dark? AppThemes.darkSecondaryyColor:AppThemes.primaryColor,
+
             height: 3,
           ),
           Container(
             height: 39,
             child: Row(
               children:  [
-                const Expanded(
+                 Expanded(
                    child: Center(
                      child: Text(
-                        'Soura Name',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w600
-                      ),
+                 getLocale(context)!.chapterName,
+
+                      style: Theme.of(context).textTheme.titleMedium,
                 ),
                    ),
                  ),
                  Container(
-                   color: AppThemes.primaryColor,
+                   color: themeProvider.currentMode == ThemeMode.dark? AppThemes.darkSecondaryyColor:AppThemes.primaryColor,
+
+
                    height: double.infinity,
                    width: 3,
                  ),
-                const Expanded(
+                 Expanded(
                    child: Center(
                      child: Text(
-                        'verses number',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w600
-                      ),
-                ),
+                       getLocale(context)!.versesNumber,
+
+                       style: Theme.of(context).textTheme.titleMedium,
+
+                     ),
                    ),
                  ),
               ],
@@ -73,17 +81,20 @@ class QuraanScreeen extends StatelessWidget {
           ),
           Container(
             width: double.infinity,
-            color: AppThemes.primaryColor,
+            color: themeProvider.currentMode == ThemeMode.dark? AppThemes.darkSecondaryyColor:AppThemes.primaryColor,
+
+
             height: 3,
           ),
           Expanded(
             child: ListView.builder(
                 itemBuilder: (context,index)=>GestureDetector(
                   onTap: (){
+
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context)=>SuraDetails(suraName: suraName[index],)
+                            builder: (context)=>SuraDetails(suraName: suraName[index], index:index  )
                         ),
                     );
                   },
@@ -95,15 +106,13 @@ class QuraanScreeen extends StatelessWidget {
                           child: Center(
                             child: Text(
                               suraName[index],
-                              style: const TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w400
-                              ),
+                              style: Theme.of(context).textTheme.bodyLarge
                             ),
                           ),
                         ),
                         Container(
-                          color: AppThemes.primaryColor,
+                          color: themeProvider.currentMode == ThemeMode.dark? AppThemes.darkSecondaryyColor:AppThemes.primaryColor,
+
                           height: double.infinity,
                           width: 3,
                         ),
@@ -112,10 +121,7 @@ class QuraanScreeen extends StatelessWidget {
                           child: Center(
                             child: Text(
                               '${versesNumber[index]}',
-                              style: const TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w400
-                              ),
+                                style: Theme.of(context).textTheme.bodyLarge
                             ),
                           ),
                         ),
@@ -131,4 +137,6 @@ class QuraanScreeen extends StatelessWidget {
       ),
     );
   }
+
+
 }

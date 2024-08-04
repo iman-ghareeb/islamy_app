@@ -1,0 +1,21 @@
+{
+  "appBarTitle":"Eslami",
+  "versesNumber":"Verses Number",
+  "chapterName":"Chapter Name",
+  "hadeethTap":"Hadeeth",
+  "quranTap":"Quran",
+  "settings":"Settings",
+  "tsbehTap":"Tasbeh",
+  "radioTap":"Radio",
+  "numOfPrases":"Number Of Prases",
+  "elahadeeth":"El Ahadeeth",
+  "ezaa":"Quran Radio",
+  "themeSetting": "Theme",
+  "langSetting": "Language",
+  "en":"English",
+  "ar":"Arabic",
+  "lightTheme": "Light",
+  "darkTheme": "Dark"
+
+
+}

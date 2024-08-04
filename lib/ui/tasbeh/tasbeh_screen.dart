@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:islamy/component/default_scaffold.dart';
+import 'package:islamy/component/functions.dart';
+import 'package:islamy/providers/theme_provider.dart';
 import 'package:islamy/themes/app_theme.dart';
+import 'package:provider/provider.dart';
 
 class TasbehScreeen extends StatefulWidget {
   const TasbehScreeen({Key? key}) : super(key: key);
@@ -23,6 +26,8 @@ class _TasbehScreeenState extends State<TasbehScreeen> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.only(
         top: 30
@@ -56,7 +61,7 @@ class _TasbehScreeenState extends State<TasbehScreeen> {
                   alignment: Alignment.topCenter,
                   children: [
                     Image.asset(
-                      'assets/images/head_sebha_logo.png',
+                      themeProvider.currentMode == ThemeMode.dark? 'assets/images/head_sebha_dark.png':'assets/images/head_sebha_logo.png',
                       width: 73,
                       height: 105,
                     ),
@@ -66,7 +71,7 @@ class _TasbehScreeenState extends State<TasbehScreeen> {
                         top: 75
                       ),
                       child: Image.asset(
-                        'assets/images/body_sebha_logo.png',
+                        themeProvider.currentMode == ThemeMode.dark?'assets/images/body_sebha_dark.png' : 'assets/images/body_sebha_logo.png',
                         width: 232,
                         height: 234,
                       ),
@@ -75,23 +80,21 @@ class _TasbehScreeenState extends State<TasbehScreeen> {
                 ),
               ),
             ),
-            const Padding(
-              padding:  EdgeInsets.symmetric(
+             Padding(
+              padding: const EdgeInsets.symmetric(
                 vertical: 30
               ),
               child:  Text(
-                'Number of praises',
-                style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w600
-                ),
+                  getLocale(context)!.numOfPrases,
+
+                  style: Theme.of(context).textTheme.titleMedium
               ),
             ),
             Container(
               width: 69,
               height: 81,
               decoration: BoxDecoration(
-                color: AppThemes.primaryColor,
+                color:themeProvider.currentMode == ThemeMode.dark? AppThemes.darkPrimaryColor: AppThemes.primaryColor,
                 borderRadius: BorderRadius.circular(20)
               ),
               child: Center(
@@ -108,20 +111,19 @@ class _TasbehScreeenState extends State<TasbehScreeen> {
               height: 30,
             ),
             Container(
-              width: 137,
-              height: 51,
+               width: 137,
+              // height: 51,
               decoration: BoxDecoration(
-                color: AppThemes.primaryColor,
-                borderRadius: BorderRadius.circular(20)
+                  color:themeProvider.currentMode == ThemeMode.dark? AppThemes.darkSecondaryyColor: AppThemes.primaryColor,
+
+                  borderRadius: BorderRadius.circular(20)
               ),
               child: Center(
                 child: Text(
                 tsabeh[index],
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 25,
-                    color: Colors.white
-                  ),
+                  style:Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color:themeProvider.currentMode == ThemeMode.dark? Colors.black:Colors.white,
+                  )
                 ),
               ),
             ),
